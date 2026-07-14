@@ -9,54 +9,95 @@ async function generateName() {
 
     const name = document.getElementById("name").value.trim();
 
-    const gender =
-        document.querySelector('input[name="gender"]:checked').value;
+    const genderInput =
+        document.querySelector('input[name="gender"]:checked');
 
     if (!name) {
-
         alert("Please enter your first name.");
-
         return;
-
     }
+
+    if (!genderInput) {
+        alert("Please select a gender.");
+        return;
+    }
+
+    const gender = genderInput.value;
 
     button.disabled = true;
     button.innerText = "Generating...";
 
     try {
 
-        const response = await fetch(APPS_SCRIPT_URL, {
+        const url =
+            `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&gender=${encodeURIComponent(gender)}`;
 
-            method: "POST",
+        console.log("Request URL:", url);
 
-            headers: {
-
-                "Content-Type": "application/json"
-
-            },
-
-            body: JSON.stringify({
-
-                name,
-                gender
-
-            })
-
+        const response = await fetch(url, {
+            method: "GET"
         });
 
-        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(
+                `HTTP ${response.status} ${response.statusText}`
+            );
+        }
 
-        alert(JSON.stringify(data, null, 2));
+        const text = await response.text();
 
-    } catch (error) {
+        console.log("Raw Response");
+        console.log(text);
 
-        console.error(error);
+        let data;
 
-        alert("Failed to connect to AI Server.");
+        try {
+
+            data = JSON.parse(text);
+
+        } catch (e) {
+
+            throw new Error(
+                "Server returned invalid JSON.\n\n" + text
+            );
+
+        }
+
+        if (!data.success) {
+
+            throw new Error(
+                data.message || "Unknown Server Error"
+            );
+
+        }
+
+        alert(
+`Pronunciation : ${data.pronunciation}
+
+Korean Name : ${data.korean_name}
+
+Meaning :
+${data.meaning}
+
+Reason :
+${data.reason}`
+        );
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert(
+`AI Server Error
+
+${err.message}`
+        );
+
+    } finally {
+
+        button.disabled = false;
+        button.innerText = "Generate Korean Name";
 
     }
-
-    button.disabled = false;
-    button.innerText = "Generate Korean Name";
 
 }
