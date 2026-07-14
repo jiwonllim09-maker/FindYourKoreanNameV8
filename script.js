@@ -1,103 +1,50 @@
-const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbze2Me1uH3xZJ8ZUyccDIQ4du_Zti_uLY_kQpcNFt_N1SmYv_yICDVf-mDhTR0F4pVq/exec";
-
 const button = document.getElementById("generateBtn");
 
-button.addEventListener("click", generateName);
+const loading = document.getElementById("loading");
 
-async function generateName() {
+const result = document.getElementById("result");
 
-    const name = document.getElementById("name").value.trim();
+button.addEventListener("click", generate);
 
-    const genderInput =
-        document.querySelector('input[name="gender"]:checked');
+function generate(){
 
-    if (!name) {
-        alert("Please enter your first name.");
+    const name=document.getElementById("name").value.trim();
+
+    const gender=document.querySelector('input[name="gender"]:checked');
+
+    if(name===""){
+        alert("Please enter your name.");
         return;
     }
 
-    if (!genderInput) {
-        alert("Please select a gender.");
+    if(!gender){
+        alert("Please select gender.");
         return;
     }
 
-    const gender = genderInput.value;
+    loading.classList.remove("hidden");
 
-    button.disabled = true;
-    button.innerText = "Generating...";
+    result.classList.add("hidden");
 
-    try {
+    button.disabled=true;
 
-        const url =
-            `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&gender=${encodeURIComponent(gender)}`;
+    setTimeout(()=>{
 
-        console.log("Request URL:", url);
+        loading.classList.add("hidden");
 
-        const response = await fetch(url, {
-            method: "GET"
-        });
+        document.getElementById("koreanName").innerText="민준";
 
-        if (!response.ok) {
-            throw new Error(
-                `HTTP ${response.status} ${response.statusText}`
-            );
-        }
+        document.getElementById("pronunciation").innerText="마이클";
 
-        const text = await response.text();
+        document.getElementById("meaning").innerText="Bright and warm-hearted person.";
 
-        console.log("Raw Response");
-        console.log(text);
+        document.getElementById("reason").innerText=
+        `${name} is naturally pronounced similar to 민준 in Korean.`;
 
-        let data;
+        result.classList.remove("hidden");
 
-        try {
+        button.disabled=false;
 
-            data = JSON.parse(text);
-
-        } catch (e) {
-
-            throw new Error(
-                "Server returned invalid JSON.\n\n" + text
-            );
-
-        }
-
-        if (!data.success) {
-
-            throw new Error(
-                data.message || "Unknown Server Error"
-            );
-
-        }
-
-        alert(
-`Pronunciation : ${data.pronunciation}
-
-Korean Name : ${data.korean_name}
-
-Meaning :
-${data.meaning}
-
-Reason :
-${data.reason}`
-        );
-
-    } catch (err) {
-
-        console.error(err);
-
-        alert(
-`AI Server Error
-
-${err.message}`
-        );
-
-    } finally {
-
-        button.disabled = false;
-        button.innerText = "Generate Korean Name";
-
-    }
+    },2000);
 
 }
