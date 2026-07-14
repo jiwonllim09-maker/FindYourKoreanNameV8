@@ -1,3 +1,8 @@
+/* ===========================
+   Find Your Korean Name V8
+   Build 02
+=========================== */
+
 *{
     margin:0;
     padding:0;
@@ -6,9 +11,11 @@
 
 body{
 
-    background:#f5f2e8;
-
     font-family:'Noto Sans KR',sans-serif;
+
+    background:linear-gradient(135deg,#f7f3eb,#ece4d2);
+
+    min-height:100vh;
 
     display:flex;
 
@@ -16,16 +23,30 @@ body{
 
     align-items:center;
 
-    min-height:100vh;
+    padding:30px;
 
-    padding:20px;
+    color:#333;
+
+}
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at top,#ffffff55,transparent 60%);
+
+    z-index:-1;
 
 }
 
 .container{
 
     width:100%;
-    max-width:500px;
+
+    max-width:550px;
 
 }
 
@@ -33,23 +54,33 @@ body{
 
     background:white;
 
-    border-radius:20px;
+    border-radius:24px;
 
-    padding:40px;
+    padding:45px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.12);
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+
+}
+
+.flag{
+
+    font-size:48px;
+
+    text-align:center;
+
+    margin-bottom:20px;
 
 }
 
 h1{
 
+    font-family:'Playfair Display',serif;
+
     text-align:center;
 
-    font-size:34px;
+    font-size:38px;
 
-    margin-bottom:10px;
-
-    font-family:'Playfair Display',serif;
+    margin-bottom:12px;
 
 }
 
@@ -59,7 +90,25 @@ h1{
 
     color:#777;
 
-    margin-bottom:35px;
+    line-height:1.7;
+
+    margin-bottom:40px;
+
+}
+
+.form-group{
+
+    margin-bottom:28px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    font-weight:600;
+
+    margin-bottom:10px;
 
 }
 
@@ -69,13 +118,23 @@ input[type=text]{
 
     padding:15px;
 
-    font-size:18px;
-
     border-radius:12px;
 
     border:1px solid #ddd;
 
-    margin-bottom:25px;
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+input[type=text]:focus{
+
+    outline:none;
+
+    border-color:#d4af37;
+
+    box-shadow:0 0 0 4px rgba(212,175,55,.15);
 
 }
 
@@ -83,11 +142,19 @@ input[type=text]{
 
     display:flex;
 
-    justify-content:center;
-
     gap:30px;
 
-    margin-bottom:30px;
+}
+
+.radio{
+
+    display:flex !important;
+
+    align-items:center;
+
+    gap:8px;
+
+    cursor:pointer;
 
 }
 
@@ -95,11 +162,7 @@ button{
 
     width:100%;
 
-    padding:16px;
-
     border:none;
-
-    border-radius:12px;
 
     background:#d4af37;
 
@@ -107,9 +170,15 @@ button{
 
     font-size:18px;
 
+    padding:16px;
+
+    border-radius:14px;
+
     cursor:pointer;
 
     transition:.25s;
+
+    font-weight:600;
 
 }
 
@@ -117,19 +186,33 @@ button:hover{
 
     transform:translateY(-2px);
 
+    box-shadow:0 10px 20px rgba(212,175,55,.3);
+
+}
+
+button:active{
+
+    transform:scale(.98);
+
 }
 
 @media(max-width:600px){
 
 .card{
 
-padding:25px;
+padding:28px;
 
 }
 
 h1{
 
-font-size:28px;
+font-size:30px;
+
+}
+
+.flag{
+
+font-size:40px;
 
 }
 

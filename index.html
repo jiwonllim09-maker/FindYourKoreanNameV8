@@ -1,60 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Find Your Korean Name</title>
+
+    <meta name="description" content="AI Korean Name Generator">
 
     <link rel="stylesheet" href="style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<div class="container">
+<div class="background"></div>
 
-    <div class="card">
+<main class="container">
 
-        <h1>Find Your Korean Name</h1>
+    <section class="card">
+
+        <div class="flag">
+
+            🇰🇷
+
+        </div>
+
+        <h1>
+
+            Find Your Korean Name
+
+        </h1>
 
         <p class="subtitle">
-            Generate your Korean identity with AI
+
+            Transform your name into a beautiful Korean identity using AI.
+
         </p>
 
-        <input
-            id="name"
-            type="text"
-            placeholder="Enter your first name">
-
-        <div class="gender">
+        <div class="form-group">
 
             <label>
-                <input type="radio" name="gender" value="Male" checked>
-                Male
+
+                First Name
+
             </label>
 
+            <input
+                id="name"
+                type="text"
+                placeholder="Michael">
+
+        </div>
+
+        <div class="form-group">
+
             <label>
-                <input type="radio" name="gender" value="Female">
-                Female
+
+                Gender
+
             </label>
+
+            <div class="gender">
+
+                <label class="radio">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Male"
+                        checked>
+
+                    Male
+
+                </label>
+
+                <label class="radio">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Female">
+
+                    Female
+
+                </label>
+
+            </div>
 
         </div>
 
         <button id="generateBtn">
 
-            Generate
+            Generate Korean Name
 
         </button>
 
-    </div>
+    </section>
 
-</div>
+</main>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
