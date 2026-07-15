@@ -1,50 +1,82 @@
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbze2Me1uH3xZJ8ZUyccDIQ4du_Zti_uLY_kQpcNFt_N1SmYv_yICDVf-mDhTR0F4pVq/exec";
+
 const button = document.getElementById("generateBtn");
-
 const loading = document.getElementById("loading");
-
 const result = document.getElementById("result");
 
 button.addEventListener("click", generate);
 
-function generate(){
+async function generate() {
 
-    const name=document.getElementById("name").value.trim();
+    const name = document.getElementById("name").value.trim();
 
-    const gender=document.querySelector('input[name="gender"]:checked');
+    const genderElement =
+        document.querySelector('input[name="gender"]:checked');
 
-    if(name===""){
+    if (!name) {
         alert("Please enter your name.");
         return;
     }
 
-    if(!gender){
+    if (!genderElement) {
         alert("Please select gender.");
         return;
     }
 
-    loading.classList.remove("hidden");
+    const gender = genderElement.value;
 
+    button.disabled = true;
+    loading.classList.remove("hidden");
     result.classList.add("hidden");
 
-    button.disabled=true;
+    try {
 
-    setTimeout(()=>{
+        const url =
+            `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&gender=${encodeURIComponent(gender)}`;
 
-        loading.classList.add("hidden");
+        console.log(url);
 
-        document.getElementById("koreanName").innerText="민준";
+        const response = await fetch(url);
 
-        document.getElementById("pronunciation").innerText="마이클";
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
 
-        document.getElementById("meaning").innerText="Bright and warm-hearted person.";
+        const data = await response.json();
 
-        document.getElementById("reason").innerText=
-        `${name} is naturally pronounced similar to 민준 in Korean.`;
+        if (!data.success) {
+            throw new Error(data.message);
+        }
+
+        document.getElementById("koreanName").innerText =
+            data.korean_name;
+
+        document.getElementById("pronunciation").innerText =
+            data.pronunciation;
+
+        document.getElementById("meaning").innerText =
+            data.meaning;
+
+        document.getElementById("reason").innerText =
+            data.reason;
 
         result.classList.remove("hidden");
 
-        button.disabled=false;
+    }
+    catch(err){
 
-    },2000);
+        console.error(err);
+
+        alert(err.message);
+
+    }
+    finally{
+
+        loading.classList.add("hidden");
+
+        button.disabled = false;
+
+    }
 
 }
