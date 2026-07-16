@@ -1,291 +1,137 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-
-    background:#f7f5f2;
-
-    color:#222;
-
-    display:flex;
-
-    justify-content:center;
-
-    padding:40px 20px;
-
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #222;
 }
 
-.container{
-
-    width:100%;
-
-    max-width:520px;
-
+.container {
+    max-width: 640px;
+    margin: 60px auto;
+    padding: 40px 24px;
+    text-align: center;
 }
 
-h1{
-
-    text-align:center;
-
-    font-size:48px;
-
+h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
 }
 
-h2{
-
-    margin-top:10px;
-
-    text-align:center;
-
-    font-size:32px;
-
+h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
 }
 
-.subtitle{
-
-    margin-top:10px;
-
-    text-align:center;
-
-    color:#777;
-
-    margin-bottom:30px;
-
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
 }
 
-.card{
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:25px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
+input[type="text"] {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-bottom: 20px;
 }
 
-label{
-
-    display:block;
-
-    font-weight:600;
-
-    margin-top:18px;
-
-    margin-bottom:8px;
-
+.gender {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 24px;
 }
 
-input[type=text]{
-
-    width:100%;
-
-    padding:14px;
-
-    border:1px solid #ddd;
-
-    border-radius:12px;
-
-    font-size:16px;
-
+.gender label {
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.gender{
-
-    display:flex;
-
-    gap:25px;
-
+button {
+    background: #111827;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.gender label{
-
-    font-weight:500;
-
+button:hover {
+    opacity: .9;
 }
 
-button{
-
-    width:100%;
-
-    margin-top:28px;
-
-    padding:16px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#111;
-
-    color:white;
-
-    font-size:17px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
 }
 
-button:hover{
-
-    background:#333;
-
+.hidden {
+    display: none;
 }
 
-#loading{
-
-    display:none;
-
-    margin-top:25px;
-
-    text-align:center;
-
-    color:#666;
-
-    font-size:16px;
-
+#loading {
+    margin-top: 30px;
+    color: #666;
 }
 
-.hidden{
-
-    display:none;
-
+.card {
+    margin-top: 40px;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    text-align: left;
 }
 
-#result{
-
-    margin-top:30px;
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:30px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
+.card h3 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-#result h3{
-
-    text-align:center;
-
-    margin-bottom:25px;
-
+.korean-name {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
-#koreanName{
-
-    font-size:46px;
-
-    font-weight:bold;
-
-    text-align:center;
-
-    color:#111;
-
+.romanization {
+    text-align: center;
+    font-size: 22px;
+    color: #666;
+    margin-bottom: 24px;
 }
 
-#romanization{
-
-    margin-top:8px;
-
-    text-align:center;
-
-    color:#888;
-
-    font-size:22px;
-
+.card h4 {
+    margin-top: 20px;
+    margin-bottom: 8px;
 }
 
-hr{
-
-    margin:25px 0;
-
-    border:none;
-
-    border-top:1px solid #eee;
-
+.card p {
+    line-height: 1.6;
+    color: #444;
 }
 
-#result strong{
-
-    display:block;
-
-    margin-top:20px;
-
-    margin-bottom:8px;
-
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
 }
 
-#result p{
-
-    line-height:1.7;
-
+.buttons button {
+    flex: 1;
 }
 
-.buttons{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:15px;
-
-    margin-top:30px;
-
-}
-
-#downloadBtn{
-
-    background:#0066ff;
-
-}
-
-#downloadBtn:hover{
-
-    background:#0054d6;
-
-}
-
-#shareBtn{
-
-    background:#22a447;
-
-}
-
-#shareBtn:hover{
-
-    background:#19853a;
-
-}
-
-@media (max-width:600px){
-
-    h2{
-
-        font-size:28px;
-
-    }
-
-    #koreanName{
-
-        font-size:38px;
-
-    }
-
-    #romanization{
-
-        font-size:20px;
-
-    }
-
+hr {
+    margin: 24px 0;
+    border: none;
+    border-top: 1px solid #eee;
 }

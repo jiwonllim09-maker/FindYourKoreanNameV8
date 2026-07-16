@@ -21,7 +21,7 @@ async function generate() {
     generateBtn.disabled = true;
     generateBtn.textContent = "Generating...";
 
-    loading.style.display = "block";
+    loading.classList.remove("hidden");
     result.classList.add("hidden");
 
     try {
@@ -32,12 +32,8 @@ async function generate() {
 
         const data = await response.json();
 
-        loading.style.display = "none";
-
         if (!data.success) {
-
             throw new Error(data.message);
-
         }
 
         document.getElementById("koreanName").textContent =
@@ -63,15 +59,15 @@ async function generate() {
     } catch (err) {
 
         console.error(err);
-
         alert(err.message);
 
+    } finally {
+
+        loading.classList.add("hidden");
+        generateBtn.disabled = false;
+        generateBtn.textContent = "Generate";
+
     }
-
-    loading.style.display = "none";
-
-    generateBtn.disabled = false;
-    generateBtn.textContent = "Generate";
 
 }
 
@@ -83,8 +79,7 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
     const roman =
         document.getElementById("romanization").textContent;
 
-    const text =
-`🇰🇷 Every name tells a story.
+    const text = `🇰🇷 Every name tells a story.
 
 Today, I discovered mine.
 
@@ -101,11 +96,8 @@ https://jiwonllim09-maker.github.io/FindYourKoreanNameV8/`;
         if (navigator.share) {
 
             await navigator.share({
-
                 title: "Find Your Korean Name",
-
-                text
-
+                text: text
             });
 
         } else {
@@ -126,6 +118,6 @@ https://jiwonllim09-maker.github.io/FindYourKoreanNameV8/`;
 
 document.getElementById("downloadBtn").addEventListener("click", () => {
 
-    alert("Certificate download will be added in the next step.");
+    alert("Certificate download will be added soon.");
 
 });
