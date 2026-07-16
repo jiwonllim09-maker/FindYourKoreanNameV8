@@ -1,3 +1,5 @@
+alert("script loaded");
+
 const API_URL = "https://script.google.com/macros/s/AKfycbze2Me1uH3xZJ8ZUyccDIQ4du_Zti_uLY_kQpcNFt_N1SmYv_yICDVf-mDhTR0F4pVq/exec";
 
 const generateBtn = document.getElementById("generateBtn");
