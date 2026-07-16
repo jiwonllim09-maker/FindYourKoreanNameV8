@@ -1,6 +1,5 @@
-alert("script loaded");
-
-const API_URL = "https://script.google.com/macros/s/AKfycbze2Me1uH3xZJ8ZUyccDIQ4du_Zti_uLY_kQpcNFt_N1SmYv_yICDVf-mDhTR0F4pVq/exec";
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbze2Me1uH3xZJ8ZUyccDIQ4du_Zti_uLY_kQpcNFt_N1SmYv_yICDVf-mDhTR0F4pVq/exec";
 
 const generateBtn = document.getElementById("generateBtn");
 const loading = document.getElementById("loading");
@@ -10,7 +9,8 @@ generateBtn.addEventListener("click", generate);
 
 async function generate() {
 
-    const name = document.getElementById("nameInput").value.trim();
+    const name =
+        document.getElementById("nameInput").value.trim();
 
     if (!name) {
         alert("Please enter your name.");
@@ -18,7 +18,9 @@ async function generate() {
     }
 
     const gender =
-        document.querySelector("input[name='gender']:checked").value;
+        document.querySelector(
+            "input[name='gender']:checked"
+        ).value;
 
     generateBtn.disabled = true;
     generateBtn.textContent = "Generating...";
@@ -28,26 +30,37 @@ async function generate() {
 
     try {
 
-        const response = await fetch(
-            `${API_URL}?name=${encodeURIComponent(name)}&gender=${gender}`
-        );
+        const url =
+            `${API_URL}?name=${encodeURIComponent(name)}&gender=${gender}`;
 
-        const data = await response.json();
+        const response =
+            await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(
+                `HTTP ${response.status}`
+            );
+        }
+
+        const data =
+            await response.json();
 
         if (!data.success) {
-            throw new Error(data.message);
+            throw new Error(
+                data.message
+            );
         }
 
         document.getElementById("koreanName").textContent =
             data.korean_name;
 
         document.getElementById("romanization").textContent =
-            data.romanization;
+            data.romanization || "";
 
         document.getElementById("originalName").textContent =
             name;
 
-        document.getElementById("pronunciation").textContent =
+                document.getElementById("pronunciation").textContent =
             data.pronunciation;
 
         document.getElementById("meaning").textContent =
@@ -61,27 +74,32 @@ async function generate() {
     } catch (err) {
 
         console.error(err);
+
         alert(err.message);
 
     } finally {
 
         loading.classList.add("hidden");
+
         generateBtn.disabled = false;
+
         generateBtn.textContent = "Generate";
 
     }
 
 }
 
-document.getElementById("shareBtn").addEventListener("click", async () => {
+document.getElementById("shareBtn").addEventListener(
+    "click",
+    async () => {
 
-    const korean =
-        document.getElementById("koreanName").textContent;
+        const korean =
+            document.getElementById("koreanName").textContent;
 
-    const roman =
-        document.getElementById("romanization").textContent;
+        const roman =
+            document.getElementById("romanization").textContent;
 
-    const text = `🇰🇷 Every name tells a story.
+        const text = `🇰🇷 Every name tells a story.
 
 Today, I discovered mine.
 
@@ -93,33 +111,39 @@ Curious about your Korean name?
 
 https://jiwonllim09-maker.github.io/FindYourKoreanNameV8/`;
 
-    try {
+        try {
 
-        if (navigator.share) {
+            if (navigator.share) {
 
-            await navigator.share({
-                title: "Find Your Korean Name",
-                text: text
-            });
+                await navigator.share({
+                    title: "Find Your Korean Name",
+                    text: text
+                });
 
-        } else {
+            } else {
 
-            await navigator.clipboard.writeText(text);
+                await navigator.clipboard.writeText(text);
 
-            alert("Share text copied!");
+                alert("Share text copied!");
+
+            }
+
+        } catch (e) {
+
+            console.log(e);
 
         }
 
-    } catch (e) {
+    }
+);    
 
-        console.log(e);
+document.getElementById("downloadBtn").addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Certificate download will be added in the next step."
+        );
 
     }
-
-});
-
-document.getElementById("downloadBtn").addEventListener("click", () => {
-
-    alert("Certificate download will be added soon.");
-
-});
+);
