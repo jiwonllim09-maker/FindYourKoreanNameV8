@@ -94,7 +94,7 @@ Curious about your Korean name?
 
 ✨ Try it here
 
-https://jiwonllim09-maker.github.io/FindYourKoreanNameV8/;
+https://jiwonllim09-maker.github.io/FindYourKoreanNameV8/`;
 
     try {
 
