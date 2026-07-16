@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Korean Name</title>
 
-    <link rel="stylesheet" href="style.css">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Find Your Korean Name</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>🇰🇷 Find Your Korean Name</h1>
+    <h1>🇰🇷</h1>
+
+    <h2>Find Your Korean Name</h2>
 
     <p class="subtitle">
-        Discover your Korean name powered by Gemini AI.
+        Discover a Korean name
     </p>
 
     <div class="card">
 
-        <label>Your First Name</label>
+        <label>Your Name</label>
 
         <input
-            id="name"
+            id="nameInput"
             type="text"
-            placeholder="Michael">
+            placeholder="Enter your name"
+        >
 
         <label>Gender</label>
 
-        <div class="gender-group">
+        <div class="gender">
 
             <label>
                 <input
                     type="radio"
                     name="gender"
                     value="male"
-                    checked>
+                    checked
+                >
                 Male
             </label>
 
@@ -43,44 +53,88 @@
                 <input
                     type="radio"
                     name="gender"
-                    value="female">
+                    value="female"
+                >
                 Female
             </label>
 
         </div>
 
         <button id="generateBtn">
-            Generate Korean Name
+
+            Generate
+
         </button>
 
     </div>
 
-    <div id="loading" class="hidden">
+    <div id="loading">
 
-        <div class="spinner"></div>
-
-        <p>AI is creating your Korean name...</p>
+        Generating your Korean name...
 
     </div>
 
     <div id="result" class="hidden">
 
-        <h2 id="koreanName"></h2>
+        <h3>
+
+            🇰🇷 Your Korean Name
+
+        </h3>
+
+        <div id="koreanName"></div>
+
+        <div id="romanization"></div>
+
+        <hr>
 
         <p>
-            <strong>Pronunciation</strong><br>
-            <span id="pronunciation"></span>
+
+            <strong>Original Name</strong>
+
         </p>
 
-        <p>
-            <strong>Meaning</strong><br>
-            <span id="meaning"></span>
-        </p>
+        <p id="originalName"></p>
 
         <p>
-            <strong>Reason</strong><br>
-            <span id="reason"></span>
+
+            <strong>Korean Pronunciation</strong>
+
         </p>
+
+        <p id="pronunciation"></p>
+
+        <p>
+
+            <strong>Meaning</strong>
+
+        </p>
+
+        <p id="meaning"></p>
+
+        <p>
+
+            <strong>Why this name?</strong>
+
+        </p>
+
+        <p id="reason"></p>
+
+        <div class="buttons">
+
+            <button id="downloadBtn">
+
+                Download Certificate
+
+            </button>
+
+            <button id="shareBtn">
+
+                Share
+
+            </button>
+
+        </div>
 
     </div>
 
@@ -89,4 +143,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
