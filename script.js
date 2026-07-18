@@ -69,6 +69,15 @@ async function generate() {
         document.getElementById("reason").textContent =
             data.reason;
 
+        document.getElementById("certKorean").textContent =
+    data.korean_name;
+
+document.getElementById("certRoman").textContent =
+    data.romanization;
+
+document.getElementById("certMeaning").textContent =
+    data.meaning;    
+
         result.classList.remove("hidden");
 
     } catch (err) {
@@ -139,11 +148,27 @@ https://jiwonllim09-maker.github.io/FindYourKoreanNameV8/`;
 
 document.getElementById("downloadBtn").addEventListener(
     "click",
-    () => {
+    async () => {
 
-        alert(
-            "Certificate download will be added in the next step."
-        );
+        const certificate =
+            document.getElementById("certificate");
+
+        const canvas =
+            await html2canvas(certificate, {
+                scale: 2,
+                backgroundColor: "#ffffff"
+            });
+
+        const link =
+            document.createElement("a");
+
+        link.download =
+            "My-Korean-Name.png";
+
+        link.href =
+            canvas.toDataURL("image/png");
+
+        link.click();
 
     }
 );
